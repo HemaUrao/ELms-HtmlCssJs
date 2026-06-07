@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="eL.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Crimson+Pro:ital@0;1&display=swap" rel="stylesheet">
+    <!-- PDF.js library for PDF text extraction -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  
+</head>
+<body>
+<div class="app-container">
+    <!-- AUTH SCREEN -->
+    <div id="authScreen" class="auth-screen">
+        <div class="auth-card">
+            <h2><i class="fas fa-graduation-cap"></i> eLMS Pro</h2>
+            <div class="input-group"><label>Email</label><input type="email" id="loginEmail" placeholder="admin@elms.com"></div>
+            <div class="input-group"><label>Password</label><input type="password" id="loginPassword" placeholder="••••••"></div>
+            <button class="auth-btn" id="loginBtn">Login</button>
+            <div class="toggle-auth" id="toggleRegister">New here? <span>Create account</span></div>
+            <div id="authError" class="error-msg"></div>
+            <div class="info-text" style="margin-top:12px;">Demo: demo@elms.com/demo123 | Admin: admin@elms.com/admin123</div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="dashboard">
+        <div class="top-bar">
+            <div class="logo"><h1><i class="fas fa-chalkboard-user"></i> eLMS · Clean Ebook</h1></div>
+            <div class="user-info">
+                <span id="currentUserEmail"></span>
+                <span id="adminBadge" class="admin-badge" style="display:none;">Admin Mode</span>
+                <button class="add-course-btn" id="openAddCourseModalBtn">➕ Add Course</button>
+                <button class="logout-btn" id="logoutBtn">Logout</button>
+            </div>
+        </div>
+        <div id="coursesView" class="courses-section">
+            <div class="courses-grid" id="coursesGrid"></div>
+        </div>
+        <div id="courseDetailView" class="course-detail">
+            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                <button class="back-btn" id="backToCoursesBtn">← All Courses</button>
+                <button class="layout-toggle" id="toggleLayoutBtn">🔄 Switch Layout</button>
+                <button class="edit-course-btn" id="editCourseMetaBtn" style="display:none;">✏️ Edit Course Info</button>
+                <button class="edit-ebook-btn" id="openAdvancedEditorBtn" style="display:none;">✏️ Edit Ebook (Advanced)</button>
+            </div>
+            <div id="courseDetailContent"></div>
+        </div>
+        <footer>📖 Supports Markdown + TXT & PDF uploads. Admin can edit with live preview.</footer>
+    </div>
+</div>
+
+<!-- Course Add Modal -->
+<div id="courseModal" class="modal"><div class="modal-content"><h3>➕ Create New Course</h3><input id="newCourseTitle" placeholder="Course title"><textarea id="newCourseDesc" rows="2" placeholder="Short description"></textarea><input id="newCourseIcon" placeholder="Icon class (e.g., fab fa-python)"><textarea id="newCourseEbook" rows="5" placeholder="Ebook content (Markdown)"></textarea><input id="newCourseVideo" placeholder="Video URL (optional)"><div class="modal-buttons"><button id="saveCourseBtn" class="auth-btn">Create</button><button id="closeModalBtn" class="logout-btn">Cancel</button></div></div></div>
+
+<!-- Edit Course Meta Modal -->
+<div id="editCourseMetaModal" class="modal"><div class="modal-content"><h3>✏️ Edit Course Details</h3><input id="editCourseTitle" placeholder="Title"><textarea id="editCourseDesc" rows="2" placeholder="Description"></textarea><input id="editCourseIcon" placeholder="Icon class"><input id="editCourseVideoUrl" placeholder="Video URL"><div class="modal-buttons"><button id="saveCourseMetaBtn" class="auth-btn">Save Changes</button><button id="closeMetaModalBtn" class="logout-btn">Cancel</button></div></div></div>
+
+<!-- Advanced Ebook Editor Modal -->
+<div id="advancedEditorModal" class="modal">
+    <div class="modal-content">
+        <h3>📝 Edit Ebook (Markdown) – Live Preview</h3>
+        <div class="editor-split">
+            <div class="editor-left">
+                <label><strong>Raw Markdown</strong></label>
+                <textarea id="editorRawMarkdown" placeholder="Write your ebook in Markdown..."></textarea>
+            </div>
+            <div class="editor-right">
+                <label><strong>Preview</strong></label>
+                <div class="preview-box" id="editorPreviewBox"></div>
+            </div>
+        </div>
+        <div class="modal-buttons">
+            <button id="saveAdvancedEbookBtn" class="auth-btn">💾 Save & Update Ebook</button>
+            <button id="closeAdvancedEditorBtn" class="logout-btn">Cancel</button>
+        </div>
+    </div>
+</div>
+<script src="eL.js"></script>
+
+
+</body>
+</html>
